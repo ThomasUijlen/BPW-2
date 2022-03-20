@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3912645460125562390}
   - component: {fileID: 4664438812563142579}
+  - component: {fileID: 2893781514207172517}
+  - component: {fileID: 4944058922975008202}
   m_Layer: 0
   m_Name: DungeonGenerator
   m_TagString: Untagged
@@ -43,5 +45,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933c460c8e7584f4ca67d6da6d58e664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomes: []
+  biomes:
+  - {fileID: 4790375782075000292, guid: a1170e66672d5a94c9ceefc49817527e, type: 3}
   mapSize: 20
+--- !u!114 &2893781514207172517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429997486580244390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624e1c515f54b34458edf83a137ab6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperatureSeed: 0
+  temperatureNoiseFrequency: 0.1
+  minTemperature: -15
+  maxTemperature: 30
+  humiditySeed: 1000
+  humidityNoiseFrequency: 0.05
+  minHumidity: 0
+  maxHumidity: 100
+--- !u!114 &4944058922975008202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429997486580244390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068ba2e55cf06444d9fd092033665aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 0

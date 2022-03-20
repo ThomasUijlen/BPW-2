@@ -37,7 +37,7 @@ public class ClimateMap : MonoBehaviour
 
     public void GenerateClimateMap(int mapSize)
     {
-        fastNoise.SetNoiseType(FastNoise.NoiseType.Perlin);
+        fastNoise.SetNoiseType(FastNoise.NoiseType.Simplex);
 
         temperatureMap = new float[mapSize, mapSize];
         humidityMap = new float[mapSize, mapSize];
@@ -63,8 +63,8 @@ public class ClimateMap : MonoBehaviour
     }
 
     private float GenerateTemperatureForCoordinate(int x, int y) {
-        float noise = fastNoise.GetNoise(x,0,y);
-        float temperature = map(noise,0,1,minTemperature,maxTemperature);
+        float noise = fastNoise.GetNoise2D(x,y);
+        float temperature = map(noise,0.0f,1.0f,minTemperature,maxTemperature);
         return temperature;
     }
 
@@ -92,7 +92,7 @@ public class ClimateMap : MonoBehaviour
     }
 
     private float GenerateHumidityForCoordinate(int x, int y) {
-        float noise = fastNoise.GetNoise(x,0,y);
+        float noise = fastNoise.GetNoise2D(x,y);
         float humidity = map(noise,0,1,minHumidity,maxHumidity);
         return humidity;
     }

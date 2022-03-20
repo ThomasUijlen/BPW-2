@@ -432,6 +432,10 @@ using FN_DECIMAL = System.Double;
             return ((hash & 4) == 0 ? -a : a) + ((hash & 2) == 0 ? -b : b) + ((hash & 1) == 0 ? -c : c);
         }
 
+        public float GetNoise2D(float x, float y) {
+            return (GetNoise(x,0,y)+1f)/2f;
+        }
+
         public FN_DECIMAL GetNoise(FN_DECIMAL x, FN_DECIMAL y, FN_DECIMAL z)
         {
             x *= m_frequency;
