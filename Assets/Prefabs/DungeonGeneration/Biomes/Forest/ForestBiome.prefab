@@ -47,3 +47,9 @@ MonoBehaviour:
   preferredHumidity: 70
   tileSet:
   - {fileID: -7323618051894684741, guid: 23055573ce2a2ad40b9c11431e124a4e, type: 3}
+  blockedTileSet:
+  - {fileID: -7323618051894684741, guid: a5c6a3ab7740baa4a8301cb969540bc2, type: 3}
+  - {fileID: -7323618051894684741, guid: 4675e3f6461651647b1af044095312e0, type: 3}
+  - {fileID: -7323618051894684741, guid: 3ebcb65036417e24a8d61721fe644b24, type: 3}
+  - {fileID: -7323618051894684741, guid: 3dd170b8612f2694d9e5c9f937dda852, type: 3}
+  - {fileID: -7323618051894684741, guid: 77e4149059646a544931c7e4dd4c554b, type: 3}

@@ -15,6 +15,9 @@ public class Biome : MonoBehaviour
     [SerializeField]
     public Tile[] tileSet;
 
+    [SerializeField]
+    public Tile[] blockedTileSet;
+
     public float GetBiomeScore(Vector2 coord, ClimateMap climateMap) {
         return (GetTemperatureScore(coord,climateMap) + GetHumidityScore(coord,climateMap))/2f;
     }

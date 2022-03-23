@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9622c173a5eecea44985baa0947c5c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preferredTemperature: 30
+  preferredTemperature: 25
   preferredHumidity: 5
   tileSet:
   - {fileID: -7323618051894684741, guid: ee79ce8826a5f8948a93755fbdf78f7c, type: 3}
+  blockedTileSet:
+  - {fileID: -7323618051894684741, guid: 819116e6a40b3534ca15c760390e98e5, type: 3}

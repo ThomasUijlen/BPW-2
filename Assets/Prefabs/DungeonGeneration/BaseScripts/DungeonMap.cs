@@ -5,7 +5,7 @@ using Noise;
 public class DungeonMap : MonoBehaviour
 {
     [SerializeField]
-    private int seed = 0;
+    public int seed = 0;
 
     [SerializeField]
     private float roomSpawnChange = 10f;

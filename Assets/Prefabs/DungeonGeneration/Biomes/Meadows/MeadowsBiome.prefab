@@ -46,4 +46,6 @@ MonoBehaviour:
   preferredTemperature: 20
   preferredHumidity: 30
   tileSet:
+  - {fileID: -7323618051894684741, guid: 35feb30794ba3874da1a0341207608dc, type: 3}
+  blockedTileSet:
   - {fileID: -7323618051894684741, guid: 45f98eac3eb6f81469405b64eda62e8c, type: 3}
