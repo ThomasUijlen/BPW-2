@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public void StartTurn() {
+    private CharacterDetails characterDetails;
 
+    public void StartTurn() {
+        characterDetails = GetComponentInChildren<CharacterDetails>();
     }
 
     public void EndTurn() {

@@ -78,8 +78,16 @@ public class DungeonGenerator : MonoBehaviour
         return tiles[(int) coord.x, (int) coord.y].active;
     }
 
+    public void OccupyTile(Vector2 coord, GridCharacter character) {
+        tiles[(int) coord.x, (int) coord.y].occupiedBy = character;
+    }
+
+    public GridCharacter GetOccupyingCharacter(Vector2 coord) {
+        return tiles[(int) coord.x, (int) coord.y].occupiedBy;
+    }
+
     public bool IsEmpty(Vector2 coord) {
-        return IsActive(coord) && tiles[(int) coord.x, (int) coord.y].occupied;
+        return IsActive(coord) && tiles[(int) coord.x, (int) coord.y].occupiedBy == null;
     }
 
     private class TileCell {
@@ -89,6 +97,6 @@ public class DungeonGenerator : MonoBehaviour
         public float biomeScore = -1000000f;
 
         public bool active = false;
-        public bool occupied = false;
+        public GridCharacter occupiedBy = null;
     }
 }

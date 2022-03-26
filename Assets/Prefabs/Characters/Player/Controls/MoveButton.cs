@@ -13,7 +13,8 @@ public class MoveButton : Button
     private DungeonGenerator dungeonGenerator;
     private MeshRenderer meshRenderer;
 
-    private void Start() {
+    private new void Start() {
+        base.Start();
         dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();    
         meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
@@ -31,9 +32,5 @@ public class MoveButton : Button
 
     public Vector2 GetCoord() {
         return new Vector2(transform.position.x, transform.position.z) / DungeonGenerator.TILE_WIDTH;
-    }
-
-    private void OnEnable() {
-        transform.localScale = Vector3.zero;
     }
 }

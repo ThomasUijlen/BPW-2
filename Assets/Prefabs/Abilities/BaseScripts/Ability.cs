@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour
 {
-    private TurnDependentObject castedBy;
+    public bool isDirectional = false;
+    internal TurnDependentObject castedBy;
 
     public void Cast(TurnDependentObject by) {
         castedBy = by;
         PerformAbility();
     }
 
-    internal void PerformAbility() {
+    internal virtual void PerformAbility() {
         //Ability logic
         FinishAbility();
     }
 
     internal void FinishAbility() {
         castedBy.EndTurn();
+        gameObject.SetActive(false);
+        GameObject.Destroy(gameObject);
     }
 }

@@ -11,6 +11,8 @@ public class CharacterDetails : MonoBehaviour
     private float currentHealth;
     private float currentEnergy;
 
+    public List<Ability> abilities = new List<Ability>();
+
     public UnityEvent healthAmountChanged;
     public UnityEvent energyAmountChanged;
     public UnityEvent dead;

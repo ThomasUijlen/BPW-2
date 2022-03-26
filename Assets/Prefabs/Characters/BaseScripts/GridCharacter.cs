@@ -19,7 +19,10 @@ public class GridCharacter : TurnDependentObject
         if(!dungeonGenerator.IsActive(GetCoord()+direction)) return;
         
         startCoord = GetCoord();
+        dungeonGenerator.OccupyTile(startCoord,null);
         targetCoord = GetCoord() + direction;
+        dungeonGenerator.OccupyTile(targetCoord,this);
+
         moving = true;
         moveProgress = 0.0f;
         characterMoved.Invoke();
