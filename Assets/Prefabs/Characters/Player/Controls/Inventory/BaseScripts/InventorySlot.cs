@@ -14,8 +14,13 @@ public class InventorySlot : MonoBehaviour
     public ItemChangedEvent itemChanged;
     public UnityEvent slotFilled;
 
-    private void Start() {
+    private bool initialLoad = true;
+
+    private void Awake() {
         if(fake) return;
+        if(!initialLoad) return;
+        initialLoad = false;
+
         GameObject item = inventorySaver.GetSavedItem(this);
 
         if(item != null) {

@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject controls;
 
-
     public void ShowControls() {
         controls.SetActive(true);
     }

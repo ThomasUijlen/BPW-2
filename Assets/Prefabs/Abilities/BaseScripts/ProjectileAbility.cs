@@ -31,18 +31,16 @@ public class ProjectileAbility : Ability
     private void FindTargetCoord() {
         Vector2 moveDirection = new Vector2(body.transform.forward.x,body.transform.forward.z);
 
-        for(int i = 0; i < maxFlyDistance; i++) {
+        for(int i = 1; i < maxFlyDistance; i++) {
             Vector2 coordToCheck = startCoord + moveDirection*i;
 
             if(dungeonGenerator.IsActive(coordToCheck) && !dungeonGenerator.IsEmpty(coordToCheck)) {
                 GridCharacter character = dungeonGenerator.GetOccupyingCharacter(coordToCheck);
 
-                if(character.tag == canHit) {
-                    characterToHit = character;
-                    targetCoord = coordToCheck;
-                    steps = i;
-                    return;
-                }
+                characterToHit = character;
+                targetCoord = coordToCheck;
+                steps = i;
+                return;
             }
 
             if(!dungeonGenerator.IsActive(coordToCheck)) {

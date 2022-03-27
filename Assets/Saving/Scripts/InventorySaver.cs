@@ -7,13 +7,17 @@ using UnityEditor;
 public class InventorySaver : ScriptableObject
 {
     public GameObject[] itemPrefabs;
+    public bool reset = false;
 
     List<ItemData> slotData = new List<ItemData>();
+
+    private void OnEnable() {
+        if(reset) slotData.Clear();
+    }
 
     public void SaveInventorySlot(InventorySlot slot) {
         if(slot.hasItem()) {
             string slotPath = GetGameObjectPath(slot.gameObject);
-            Debug.Log(slot.GetItem().itemName);
             slotData.Add(new ItemData(slotPath,slot.GetItem().itemName));
         } else {
             string slotPath = GetGameObjectPath(slot.gameObject);

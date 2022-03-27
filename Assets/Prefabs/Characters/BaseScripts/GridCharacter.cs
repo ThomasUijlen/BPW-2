@@ -12,12 +12,12 @@ public class GridCharacter : TurnDependentObject
     private DungeonGenerator dungeonGenerator;
 
     public new void Start() {
-        base.Start();
-        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();    
+        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();  
+        base.Start();  
     }
 
     public void Move(Vector2 direction) {
-        if(!dungeonGenerator.IsActive(GetCoord()+direction)) return;
+        if(!dungeonGenerator.IsEmpty(GetCoord()+direction)) return;
         
         startCoord = GetCoord();
         dungeonGenerator.OccupyTile(startCoord,null);

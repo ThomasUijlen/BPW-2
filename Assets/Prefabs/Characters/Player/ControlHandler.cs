@@ -17,6 +17,10 @@ public class ControlHandler : MonoBehaviour
         ShowStartButtons();
     }
 
+    private void OnDisable() {
+        HideAll();
+    }
+
     public void HideAll() {
         startButtons.SetActive(false);
         moveButtons.SetActive(false);

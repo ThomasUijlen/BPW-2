@@ -8,11 +8,8 @@ public class TurnDependentObject : MonoBehaviour
     public UnityEvent turnStarted;
     public UnityEvent turnEnded;
 
-
-    private LinkedListNode<TurnDependentObject> linkedListNode;
-
     public void Start() {
-        linkedListNode = TurnHandler.RegisterTurnDependentObject(this);
+        TurnHandler.RegisterTurnDependentObject(this);
     }
 
     public void StartTurn() {
@@ -21,6 +18,6 @@ public class TurnDependentObject : MonoBehaviour
 
     public void EndTurn() {
         turnEnded.Invoke();
-        TurnHandler.RegisterTurnEnd(linkedListNode);
+        TurnHandler.RegisterTurnEnd(this);
     }
 }

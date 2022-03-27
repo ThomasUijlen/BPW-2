@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 625518255843103225}
   - component: {fileID: 8931749639038669817}
   - component: {fileID: 4145731882346217799}
+  - component: {fileID: 770653892682069749}
+  - component: {fileID: 3542519713907490481}
   m_Layer: 0
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -48,9 +50,9 @@ MonoBehaviour:
   turnStarted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6819718691809732908}
-        m_TargetAssemblyTypeName: CharacterDetails, Assembly-CSharp
-        m_MethodName: TurnStarted
+      - m_Target: {fileID: 4145731882346217799}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: StartTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -63,9 +65,9 @@ MonoBehaviour:
   turnEnded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6819718691809732908}
-        m_TargetAssemblyTypeName: CharacterDetails, Assembly-CSharp
-        m_MethodName: TurnEnded
+      - m_Target: {fileID: 4145731882346217799}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -93,6 +95,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  body: {fileID: 0}
 --- !u!114 &4145731882346217799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +108,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117844a7ab469ef4885b8a12be8a7af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionDistance: 10
+--- !u!114 &770653892682069749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902726811829272967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270018975662e5d4c9f94f282750d01c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  maxEnergy: 100
+  energyRegen: 20
+  abilities: []
+  healthAmountChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  energyAmountChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  dead:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3542519713907490481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902726811829272967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0638ef58544d845a86c20b16199a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPath: []
 --- !u!1 &6066351204616417831
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +159,6 @@ GameObject:
   - component: {fileID: 3719095726490062853}
   - component: {fileID: 5405558977259148201}
   - component: {fileID: 6543944421926522851}
-  - component: {fileID: 6819718691809732908}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -202,27 +243,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6819718691809732908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6066351204616417831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 270018975662e5d4c9f94f282750d01c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  maxEnergy: 100
-  energyRegen: 20
-  healthAmountChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  energyAmountChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  dead:
-    m_PersistentCalls:
-      m_Calls: []

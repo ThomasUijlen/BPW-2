@@ -6,16 +6,15 @@ public static class TurnHandler
 {
     private static LinkedList<TurnDependentObject> turnDependentObjects = new LinkedList<TurnDependentObject>();
 
-    public static LinkedListNode<TurnDependentObject> RegisterTurnDependentObject(TurnDependentObject turnDependentObject) {
-        LinkedListNode<TurnDependentObject> linkedListNode = new LinkedListNode<TurnDependentObject>(turnDependentObject);
-        turnDependentObjects.AddLast(linkedListNode);
+    public static void RegisterTurnDependentObject(TurnDependentObject turnDependentObject) {
+        turnDependentObjects.AddLast(turnDependentObject);
 
         if(turnDependentObjects.Count == 1) turnDependentObject.StartTurn();
-
-        return linkedListNode;
     }
 
-    public static void RegisterTurnEnd(LinkedListNode<TurnDependentObject> linkedListNode) {
+    public static void RegisterTurnEnd(TurnDependentObject turnDependentObject) {
+        LinkedListNode<TurnDependentObject> linkedListNode = turnDependentObjects.Find(turnDependentObject);
+
         if(linkedListNode.Next != null) {
             linkedListNode.Next.Value.StartTurn();
         } else {

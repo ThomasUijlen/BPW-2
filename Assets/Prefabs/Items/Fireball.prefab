@@ -9658,6 +9658,7 @@ MonoBehaviour:
   type: Ability
   itemName: Fireball
   equipPrefab: {fileID: 1724092577383545034, guid: a3a80ff2abc9aae4e8ecea1a923f39cb, type: 3}
+  canBeGrabbed: 1
   inventorySlot: {fileID: 0}
 --- !u!114 &8043299296587625147
 MonoBehaviour:
@@ -9686,6 +9687,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  pressedFrom:
+    m_PersistentCalls:
+      m_Calls: []
   release:
     m_PersistentCalls:
       m_Calls:

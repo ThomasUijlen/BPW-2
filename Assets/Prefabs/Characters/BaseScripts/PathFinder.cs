@@ -6,15 +6,16 @@ public class PathFinder : MonoBehaviour
 {
     private DungeonGenerator dungeonGenerator;
 
-    private List<Vector2> currentPath = new List<Vector2>();
+    [HideInInspector]
+    public List<Vector2Int> currentPath = new List<Vector2Int>();
 
     private PathData pathData;
 
-    public new void Start() {
+    public void Start() {
         dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();    
     }
 
-    public void FindPath(Vector2 from, Vector2 to) {
+    public void FindPath(Vector2Int from, Vector2Int to) {
         pathData = new PathData();
         pathData.from = from;
         pathData.to = to;
@@ -26,7 +27,11 @@ public class PathFinder : MonoBehaviour
             PathNode exploreTarget = GetLowestScoreNode();
             tries++;
 
+            Debug.Log(tries);
+            Debug.Log(exploreTarget.coord);
+
             if(exploreTarget.coord == to) {
+                Debug.Log("woohoo");
                 BuildPath(exploreTarget);
                 break;
             } else {
@@ -68,18 +73,19 @@ public class PathFinder : MonoBehaviour
 
     private void ExploreAroundCoord(PathNode pathNode) {
         pathData.unexploredNodes.Remove(pathNode);
-        pathData.exploredCoords.Add(pathNode.coord);
 
-        if(!dungeonGenerator.IsEmpty(pathNode.coord)) return;
+        if(!dungeonGenerator.IsEmpty(pathNode.coord) && pathNode.coord != pathData.from) return;
 
-        ExploreCoord(pathNode.coord + new Vector2(1,0),pathNode);
-        ExploreCoord(pathNode.coord + new Vector2(-1,0),pathNode);
-        ExploreCoord(pathNode.coord + new Vector2(0,1),pathNode);
-        ExploreCoord(pathNode.coord + new Vector2(0,-1),pathNode);
+        ExploreCoord(pathNode.coord + new Vector2Int(1,0),pathNode);
+        ExploreCoord(pathNode.coord + new Vector2Int(-1,0),pathNode);
+        ExploreCoord(pathNode.coord + new Vector2Int(0,1),pathNode);
+        ExploreCoord(pathNode.coord + new Vector2Int(0,-1),pathNode);
     }
 
-    private void ExploreCoord(Vector2 coord, PathNode parent) {
+    private void ExploreCoord(Vector2Int coord, PathNode parent) {
+        Debug.Log("Explore!");
         if(pathData.exploredCoords.Contains(coord)) return;
+        pathData.exploredCoords.Add(coord);
 
         PathNode pathNode = new PathNode(coord,parent,parent.stepsFromOrigin + 1,pathData);
         pathData.unexploredNodes.Add(pathNode);
@@ -88,20 +94,20 @@ public class PathFinder : MonoBehaviour
 
     private class PathData {
         public List<PathNode> unexploredNodes = new List<PathNode>();
-        public List<Vector2> exploredCoords = new List<Vector2>();
+        public List<Vector2Int> exploredCoords = new List<Vector2Int>();
 
-        public Vector2 from;
-        public Vector2 to;
+        public Vector2Int from;
+        public Vector2Int to;
     }
     private class PathNode {
-        public Vector2 coord;
+        public Vector2Int coord;
         public PathNode parent;
 
         public float stepsFromOrigin = 0.0f;
         public float distanceToTarget = 0.0f;
         public float score = 0.0f;
 
-        public PathNode(Vector2 coord, PathNode parent, float stepsFromOrigin, PathData pathData) {
+        public PathNode(Vector2Int coord, PathNode parent, float stepsFromOrigin, PathData pathData) {
             this.coord = coord;
             this.parent = parent;
             this.stepsFromOrigin = stepsFromOrigin;
@@ -110,7 +116,7 @@ public class PathFinder : MonoBehaviour
         }
     }
 
-    public static float QuickDistanceBetweenVectors(Vector2 a, Vector2 b)
+    public static float QuickDistanceBetweenVectors(Vector2Int a, Vector2Int b)
     {
         return (diff(a.x, b.x) + diff(a.y, b.y));
     }

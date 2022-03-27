@@ -7,6 +7,7 @@ public class MoveButton : Button
 {
     public UnityEvent<Vector2> pressedDirection;
     public Vector2 direction;
+    public bool hideWhenCharacter = true;
     
 
 
@@ -27,7 +28,11 @@ public class MoveButton : Button
             pressed.Invoke();
         }
 
-        meshRenderer.enabled = dungeonGenerator.IsActive(GetCoord());
+        if(hideWhenCharacter) {
+            meshRenderer.enabled = dungeonGenerator.IsEmpty(GetCoord());
+        } else {
+            meshRenderer.enabled = dungeonGenerator.IsActive(GetCoord());
+        }
     }
 
     public Vector2 GetCoord() {
