@@ -9,24 +9,27 @@ public class ProjectileAbility : Ability
     public float damage = 10.0f;
     public int maxFlyDistance = 10;
 
+    public GameObject hitEffect;
+
     private Vector2 startCoord;
     private Vector2 targetCoord;
+    private int steps = 0;
     private GridCharacter characterToHit;
 
 
     private DungeonGenerator dungeonGenerator;
 
-    public void Start() {
-        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();    
-    }
-
     internal override void PerformAbility() {
+        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+
+        transform.position = castedBy.transform.position;
+        startCoord = GetCoord();
+
         FindTargetCoord();
-        FinishAbility();
     }
 
     private void FindTargetCoord() {
-        Vector2 moveDirection = new Vector2(castedBy.transform.forward.x,castedBy.transform.forward.z);
+        Vector2 moveDirection = new Vector2(body.transform.forward.x,body.transform.forward.z);
 
         for(int i = 0; i < maxFlyDistance; i++) {
             Vector2 coordToCheck = startCoord + moveDirection*i;
@@ -37,10 +40,18 @@ public class ProjectileAbility : Ability
                 if(character.tag == canHit) {
                     characterToHit = character;
                     targetCoord = coordToCheck;
+                    steps = i;
                     return;
                 }
             }
 
+            if(!dungeonGenerator.IsActive(coordToCheck)) {
+                targetCoord = coordToCheck;
+                steps = i;
+                return;
+            }
+
+            steps = i;
             targetCoord = coordToCheck;
         }
     }
@@ -55,13 +66,16 @@ public class ProjectileAbility : Ability
 
     float moveProgress = 0.0f;
     private void Update() {
-        moveProgress += Time.deltaTime*projectileSpeed;
+        if(moveProgress < 0) return;
+
+        moveProgress += Time.deltaTime*projectileSpeed/steps;
         SetCoord(Vector2.Lerp(startCoord,targetCoord,moveProgress));
 
         if(moveProgress > 1.0f) {
-            moveProgress = 1.0f;
+            moveProgress = -1.0f;
             
             if(characterToHit != null) characterToHit.GetComponent<CharacterDetails>().ChangeHealth(-damage);
+            if(hitEffect) Instantiate(hitEffect,transform.position,transform.rotation);
             FinishAbility();
         }
     }

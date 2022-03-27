@@ -6,9 +6,16 @@ public class ControlHandler : MonoBehaviour
 {
     public GameObject startButtons;
     public GameObject moveButtons;
+    public GameObject abilityBar;
     public GameObject castDirectionButtons;
     public GameObject inventory;
     public GameObject cancelButton;
+
+    private void OnEnable() {
+        ShowAll();
+        HideAll();
+        ShowStartButtons();
+    }
 
     public void HideAll() {
         startButtons.SetActive(false);
@@ -16,11 +23,27 @@ public class ControlHandler : MonoBehaviour
         castDirectionButtons.SetActive(false);
         inventory.SetActive(false);
         cancelButton.SetActive(false);
+        abilityBar.SetActive(false);
+    }
+
+    public void ShowAll() {
+        startButtons.SetActive(true);
+        moveButtons.SetActive(true);
+        castDirectionButtons.SetActive(true);
+        inventory.SetActive(true);
+        cancelButton.SetActive(true);
+        abilityBar.SetActive(true);
     }
 
     public void ShowMoveButtons() {
         startButtons.SetActive(false);
         moveButtons.SetActive(true);
+        cancelButton.SetActive(true);
+    }
+
+    public void showAbilityBar() {
+        startButtons.SetActive(false);
+        abilityBar.SetActive(true);
         cancelButton.SetActive(true);
     }
 

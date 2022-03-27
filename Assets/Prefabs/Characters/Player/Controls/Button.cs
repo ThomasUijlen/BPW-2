@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Button : MonoBehaviour
 {
     public UnityEvent pressed;
+    public UnityEvent<GameObject> pressedFrom;
     public UnityEvent release;
     internal bool moused = false;
     internal Vector3 targetScale = Vector3.one;
@@ -34,6 +35,7 @@ public class Button : MonoBehaviour
                     justPressed = true;
                     justReleased = false;
                     pressed.Invoke();
+                    pressedFrom.Invoke(gameObject);
                 }
             }
         }

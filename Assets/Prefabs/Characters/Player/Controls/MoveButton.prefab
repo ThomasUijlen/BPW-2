@@ -61,6 +61,12 @@ MonoBehaviour:
   pressed:
     m_PersistentCalls:
       m_Calls: []
+  release:
+    m_PersistentCalls:
+      m_Calls: []
+  pressedDirection:
+    m_PersistentCalls:
+      m_Calls: []
   direction: {x: 0, y: 0}
 --- !u!1001 &4863699196020226906
 PrefabInstance:
@@ -133,6 +139,14 @@ PrefabInstance:
       propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: b2844d50b07222d49af28d89e37a3469, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e5a7544cc9020454c9c4129cdb19b347, type: 2}
+    - target: {fileID: -7635826562936255635, guid: b2844d50b07222d49af28d89e37a3469, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0581e93887bd4054994bdc55aab3cfb4, type: 2}
     - target: {fileID: 919132149155446097, guid: b2844d50b07222d49af28d89e37a3469, type: 3}
       propertyPath: m_Name
       value: ArrowButton

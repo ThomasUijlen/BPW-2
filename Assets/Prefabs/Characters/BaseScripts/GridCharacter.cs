@@ -7,6 +7,7 @@ public class GridCharacter : TurnDependentObject
 {
     public UnityEvent characterMoved;
     public UnityEvent finishedMoving;
+    public GameObject body;
 
     private DungeonGenerator dungeonGenerator;
 
@@ -34,6 +35,11 @@ public class GridCharacter : TurnDependentObject
 
     public void SetCoord(Vector2 newCoord) {
         transform.position = new Vector3(newCoord.x * DungeonGenerator.TILE_WIDTH,transform.position.y,newCoord.y * DungeonGenerator.TILE_WIDTH);
+    }
+
+    public void LookAt(Vector2 direction) {
+        Vector3 lookDirection = body.transform.position + new Vector3(direction.x,0,direction.y);
+        body.transform.LookAt(lookDirection);
     }
 
 

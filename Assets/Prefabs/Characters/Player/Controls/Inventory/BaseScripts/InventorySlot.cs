@@ -8,12 +8,14 @@ public class InventorySlot : MonoBehaviour
     private Item item = null;
 
     public List<string> filters = new List<string>();
+    public bool fake = false;
     public InventorySaver inventorySaver;
 
-    public UnityEvent<Item> itemChanged;
+    public ItemChangedEvent itemChanged;
     public UnityEvent slotFilled;
 
     private void Start() {
+        if(fake) return;
         GameObject item = inventorySaver.GetSavedItem(this);
 
         if(item != null) {
@@ -21,13 +23,31 @@ public class InventorySlot : MonoBehaviour
             this.item.inventorySlot = this;
             item.transform.eulerAngles = transform.eulerAngles;
             item.transform.position = transform.position;
+
+            slotFilled.Invoke();
+            itemChanged.Invoke(this.item);
         }
     }
 
     public void SetItem(Item item) {
+        if(fake) Debug.Log(this.item);
+        if(fake && this.item != null) GameObject.Destroy(this.item.gameObject);
+
+        if(item != null) {
+            slotFilled.Invoke();
+
+            if(fake) {
+                item = Instantiate(item);
+                item.inventorySlot = this;
+                item.transform.eulerAngles = transform.eulerAngles;
+                item.transform.position = transform.position;
+                item.canBeGrabbed = false;
+            }
+        }
+
         this.item = item;
-        if(item != null) slotFilled.Invoke();
-        itemChanged.Invoke(item);
+        itemChanged.Invoke(this.item);
+        if(this.item) item.gameObject.SetActive(isActiveAndEnabled);
 
         inventorySaver.SaveInventorySlot(this);
     }
@@ -58,3 +78,6 @@ public class InventorySlot : MonoBehaviour
         if(item != null) item.gameObject.SetActive(false);
     }
 }
+
+[System.Serializable]
+ public class ItemChangedEvent : UnityEvent<Item> {}

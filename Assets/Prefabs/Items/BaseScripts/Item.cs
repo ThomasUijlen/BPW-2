@@ -6,6 +6,10 @@ public class Item : MonoBehaviour
 {
     public string type = "";
     public string itemName = "";
+    public GameObject equipPrefab;
+
+    [HideInInspector]
+    public bool canBeGrabbed = true;
 
     [HideInInspector]
     public InventorySlot inventorySlot;
@@ -15,6 +19,7 @@ public class Item : MonoBehaviour
     private Vector3 offset;
 
     public void ItemGrabbed() {
+        if(!canBeGrabbed) return;
         grabbed = true;
 
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -56,5 +61,9 @@ public class Item : MonoBehaviour
 
     private void OnTriggerExit(Collider other) {
         newSlot = null;
+    }
+
+    private void OnEnable() {
+        if(inventorySlot) transform.position = inventorySlot.transform.position;
     }
 }
