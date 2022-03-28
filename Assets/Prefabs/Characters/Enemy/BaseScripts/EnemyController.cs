@@ -21,9 +21,10 @@ public class EnemyController : MonoBehaviour
             pathFinder.FindPath(Vector2Int.RoundToInt(gridCharacter.GetCoord()),Vector2Int.RoundToInt(player.GetComponent<GridCharacter>().GetCoord()));
 
             Vector2 moveDirection = (pathFinder.currentPath[1] - gridCharacter.GetCoord());
-            Debug.Log(moveDirection);
-            GetComponent<GridCharacter>().Move(moveDirection);
+            if(gridCharacter.SafeMove(moveDirection)) return;
         }
+
+        gridCharacter.EndTurn();
     }
 
     public void EndTurn() {

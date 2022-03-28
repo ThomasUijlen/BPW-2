@@ -17,16 +17,24 @@ public class GridCharacter : TurnDependentObject
     }
 
     public void Move(Vector2 direction) {
-        if(!dungeonGenerator.IsEmpty(GetCoord()+direction)) return;
+        SafeMove(direction);
+    }
+
+    public bool SafeMove(Vector2 direction, bool instant = false) {
+        if(!dungeonGenerator.IsEmpty(GetCoord()+direction)) return false;
         
         startCoord = GetCoord();
         dungeonGenerator.OccupyTile(startCoord,null);
         targetCoord = GetCoord() + direction;
         dungeonGenerator.OccupyTile(targetCoord,this);
 
-        moving = true;
-        moveProgress = 0.0f;
-        characterMoved.Invoke();
+        if(!instant) {
+            moving = true;
+            moveProgress = 0.0f;
+            characterMoved.Invoke();
+        }
+
+        return true;
     }
 
     public Vector2 GetCoord() {
