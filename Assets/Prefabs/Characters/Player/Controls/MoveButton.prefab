@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.5, z: 2}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1869150633490479772
 MonoBehaviour:
@@ -61,6 +61,9 @@ MonoBehaviour:
   pressed:
     m_PersistentCalls:
       m_Calls: []
+  pressedFrom:
+    m_PersistentCalls:
+      m_Calls: []
   release:
     m_PersistentCalls:
       m_Calls: []
@@ -68,6 +71,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   direction: {x: 0, y: 0}
+  hideWhenCharacter: 1
 --- !u!1001 &4863699196020226906
 PrefabInstance:
   m_ObjectHideFlags: 0

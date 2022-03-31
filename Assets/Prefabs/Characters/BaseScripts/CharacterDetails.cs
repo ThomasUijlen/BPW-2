@@ -8,10 +8,11 @@ public class CharacterDetails : MonoBehaviour
     public float maxHealth = 100.0f;
     public float maxEnergy = 100.0f;
     public float energyRegen = 20.0f;
-    private float currentHealth;
-    private float currentEnergy;
 
-    public List<Ability> abilities = new List<Ability>();
+    [HideInInspector]
+    public float currentHealth;
+    [HideInInspector]
+    public float currentEnergy;
 
     public UnityEvent healthAmountChanged;
     public UnityEvent energyAmountChanged;
@@ -34,7 +35,9 @@ public class CharacterDetails : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0.0f, maxHealth);
 
         healthAmountChanged.Invoke();
-        if(currentHealth == 0) dead.Invoke();
+        if(currentHealth == 0) {
+            dead.Invoke();
+        }
     }
 
     public void ChangeEnergy(float amount) {

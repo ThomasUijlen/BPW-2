@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProjectileAbility : Ability
 {
-    public string canHit = "";
     public float projectileSpeed = 1.0f;
     public float damage = 10.0f;
     public int maxFlyDistance = 10;

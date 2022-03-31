@@ -8,12 +8,17 @@ public class DungeonMap : MonoBehaviour
     public int seed = 0;
 
     [SerializeField]
-    private float roomSpawnChange = 10f;
+    private float roomSpawnChance = 10f;
 
     [SerializeField]
     private int minRoomSize = 2;
     [SerializeField]
     private int maxRoomSize = 5;
+
+    [SerializeField]
+    private float enemySpawnChance = 10f;
+    [SerializeField]
+    private float itemSpawnChance = 10f;
 
 
     private FastNoise fastNoise = new FastNoise();
@@ -44,7 +49,7 @@ public class DungeonMap : MonoBehaviour
         {
             for (int y = 0; y < dungeonMap.GetLength(1); y++)
             {
-                if(fastNoise.GetNoise2D(x,y)*100f < roomSpawnChange) {
+                if(fastNoise.GetNoise2D(x,y)*100f < roomSpawnChance) {
                     Room room = new Room();
                     room.center = new Vector2(x,y);
                     room.size = new Vector2(
@@ -144,5 +149,50 @@ public class DungeonMap : MonoBehaviour
     private class Room {
         public Vector2 center;
         public Vector2 size;
+    }
+
+
+
+
+
+
+
+
+
+    //Object spawning
+    public void PlaceObjects(DungeonGenerator dungeonGenerator) {
+        fastNoise.SetNoiseType(FastNoise.NoiseType.Simplex);
+        fastNoise.SetSeed(seed);
+        fastNoise.SetFrequency(100000);
+
+        for(int x = 0; x < dungeonGenerator.mapSize; x++) {
+            for(int y = 0; y < dungeonGenerator.mapSize; y++) {
+                DungeonGenerator.TileCell tileCell = dungeonGenerator.tiles[x,y];
+
+                spawnEnemy(tileCell);
+            }
+        }
+
+        fastNoise.SetSeed(seed+10000);
+        for(int x = 0; x < dungeonGenerator.mapSize; x++) {
+            for(int y = 0; y < dungeonGenerator.mapSize; y++) {
+                DungeonGenerator.TileCell tileCell = dungeonGenerator.tiles[x,y];
+
+                spawnItem(tileCell);
+            }
+        }
+    }
+
+    private void spawnEnemy(DungeonGenerator.TileCell tileCell) {
+        if(!tileCell.active || tileCell.biome.enemySet.Length == 0 || fastNoise.GetNoise2D(tileCell.coordinates.x,tileCell.coordinates.y)*100f > enemySpawnChance) return;
+        GridCharacter character = tileCell.biome.enemySet[Random.Range(0,tileCell.biome.enemySet.Length)];
+        tileCell.occupiedBy = Instantiate(character,new Vector3(tileCell.coordinates.x,0,tileCell.coordinates.y)*DungeonGenerator.TILE_WIDTH + Vector3.up, Quaternion.Euler(0,0,0));
+    }
+
+    private void spawnItem(DungeonGenerator.TileCell tileCell) {
+        if(!tileCell.active || tileCell.biome.itemSet.Length == 0 || fastNoise.GetNoise2D(tileCell.coordinates.x,tileCell.coordinates.y)*100f > itemSpawnChance) return;
+        Item item = tileCell.biome.itemSet[Random.Range(0,tileCell.biome.itemSet.Length)];
+        tileCell.item = Instantiate(item,new Vector3(tileCell.coordinates.x,0,tileCell.coordinates.y)*DungeonGenerator.TILE_WIDTH + Vector3.up, Quaternion.Euler(0,0,0));
+        tileCell.item.canBeGrabbed = false;
     }
 }

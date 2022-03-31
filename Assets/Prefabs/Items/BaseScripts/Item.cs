@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
     private Vector3 offset;
 
     public void ItemGrabbed() {
+        Debug.Log(canBeGrabbed);
         if(!canBeGrabbed) return;
         grabbed = true;
 

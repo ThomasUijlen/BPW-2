@@ -48,6 +48,7 @@ MonoBehaviour:
   biomes:
   - {fileID: 4790375782075000292, guid: a1170e66672d5a94c9ceefc49817527e, type: 3}
   mapSize: 20
+  fillEmpty: 1
 --- !u!114 &2893781514207172517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,3 +82,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 0
+  roomSpawnChance: 10
+  minRoomSize: 2
+  maxRoomSize: 5
+  enemySpawnChance: 6
+  itemSpawnChance: 10

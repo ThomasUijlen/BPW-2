@@ -12,7 +12,7 @@ public class GridCharacter : TurnDependentObject
     private DungeonGenerator dungeonGenerator;
 
     public new void Start() {
-        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();  
+        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
         base.Start();  
     }
 

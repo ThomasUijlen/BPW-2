@@ -95,7 +95,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  body: {fileID: 0}
+  body: {fileID: 6066351204616417831}
 --- !u!114 &4145731882346217799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionDistance: 10
+  ability: {fileID: 4871217126645701884, guid: a3a80ff2abc9aae4e8ecea1a923f39cb, type: 3}
 --- !u!114 &770653892682069749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +125,8 @@ MonoBehaviour:
   maxHealth: 100
   maxEnergy: 100
   energyRegen: 20
-  abilities: []
+  currentHealth: 0
+  currentEnergy: 0
   healthAmountChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -133,7 +135,19 @@ MonoBehaviour:
       m_Calls: []
   dead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4145731882346217799}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: Dead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3542519713907490481
 MonoBehaviour:
   m_ObjectHideFlags: 0

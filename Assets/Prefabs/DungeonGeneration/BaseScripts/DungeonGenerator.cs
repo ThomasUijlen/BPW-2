@@ -10,7 +10,7 @@ public class DungeonGenerator : MonoBehaviour
     private Biome[] biomes;
 
     [SerializeField]
-    private int mapSize = 20;
+    public int mapSize = 20;
 
     [SerializeField]
     private bool fillEmpty = true;
@@ -18,19 +18,20 @@ public class DungeonGenerator : MonoBehaviour
     private ClimateMap climateMap;
     private DungeonMap dungeonMap;
 
-    private TileCell[,] tiles;
+    public TileCell[,] tiles;
 
-    private void Start() {
+    private void Awake() {
         climateMap = GetComponent<ClimateMap>();
         climateMap.GenerateClimateMap(mapSize);
 
         dungeonMap = GetComponent<DungeonMap>();
         dungeonMap.GenerateDungeonMap(mapSize);
 
-        generateDungeon();
+        GenerateDungeon();
+        FillDungeon();
     }
 
-    private void generateDungeon() {
+    private void GenerateDungeon() {
         tiles = new TileCell[mapSize,mapSize];
 
         Random.InitState(dungeonMap.seed);
@@ -41,13 +42,17 @@ public class DungeonGenerator : MonoBehaviour
                 tiles[x,y] = tileCell;
 
                 tileCell.coordinates = new Vector2(x,y);
-                assignBiome(tileCell);
-                createTile(tileCell);
+                AssignBiome(tileCell);
+                CreateTile(tileCell);
             }
         }
     }
 
-    private void assignBiome(TileCell tileCell) {
+    private void FillDungeon() {
+        dungeonMap.PlaceObjects(this);
+    }
+
+    private void AssignBiome(TileCell tileCell) {
         foreach (Biome biome in biomes)
         {
             float newScore = biome.GetBiomeScore(tileCell.coordinates,climateMap);
@@ -58,7 +63,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void createTile(TileCell tileCell) {
+    private void CreateTile(TileCell tileCell) {
         tileCell.active = dungeonMap.IsActive(tileCell.coordinates);
 
         if(tileCell.active) {
@@ -90,10 +95,29 @@ public class DungeonGenerator : MonoBehaviour
         return IsActive(coord) && tiles[(int) coord.x, (int) coord.y].occupiedBy == null;
     }
 
-    private class TileCell {
+    public void PlaceItem(Vector2 coord, Item item) {
+        TileCell tileCell = tiles[(int) coord.x, (int) coord.y];
+        tileCell.item = item;
+        item.transform.position = tileCell.tile.transform.position + Vector3.up;
+    }
+
+    public Item GetItem(Vector2 coord) {
+        return tiles[(int) coord.x, (int) coord.y].item;
+    }
+
+    public bool HasItem(Vector2 coord) {
+        return IsActive(coord) && tiles[(int) coord.x, (int) coord.y].item != null;
+    }
+
+    public void ClearItem(Vector2 coord) {
+        tiles[(int) coord.x, (int) coord.y].item = null;
+    }
+
+    public class TileCell {
         public Tile tile;
         public Vector2 coordinates;
         public Biome biome;
+        public Item item;
         public float biomeScore = -1000000f;
 
         public bool active = false;

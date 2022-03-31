@@ -52,3 +52,7 @@ MonoBehaviour:
   - {fileID: -7323618051894684741, guid: 141cabd83e71fcc48a658647a239f4ec, type: 3}
   - {fileID: -7323618051894684741, guid: 637f99068a48d374ab82d9cc7ff1eb95, type: 3}
   - {fileID: -7323618051894684741, guid: 7ae699f0111d9b24dbe98c063a053f50, type: 3}
+  enemySet:
+  - {fileID: 8931749639038669817, guid: d9240050829ad854393c5e3550a99961, type: 3}
+  itemSet:
+  - {fileID: 5245937852001795502, guid: 94effde38a8c83043a0a7b4a1ce536e1, type: 3}

@@ -4851,9 +4851,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDirectional: 1
   startCastEffect: {fileID: 0}
-  canHit: 
+  aiCastDistance: 5
   projectileSpeed: 4
-  damage: 10
+  damage: 50
   maxFlyDistance: 10
   hitEffect: {fileID: 1724092577383545034, guid: 1edfd3e4cb0b0964a85f38f17c1daf41, type: 3}
 --- !u!1 &4325722726236957111

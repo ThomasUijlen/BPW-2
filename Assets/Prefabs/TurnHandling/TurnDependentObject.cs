@@ -20,4 +20,8 @@ public class TurnDependentObject : MonoBehaviour
         turnEnded.Invoke();
         TurnHandler.RegisterTurnEnd(this);
     }
+
+    public void OnDestroy() {
+        TurnHandler.DeregisterTurnDependentObject(this);
+    }
 }

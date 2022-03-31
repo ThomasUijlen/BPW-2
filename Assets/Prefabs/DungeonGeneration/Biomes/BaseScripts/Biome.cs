@@ -12,11 +12,12 @@ public class Biome : MonoBehaviour
     private float preferredHumidity = 0.0f;
     private float humidityRange = 40.0f;
 
-    [SerializeField]
     public Tile[] tileSet;
 
-    [SerializeField]
     public Tile[] blockedTileSet;
+
+    public GridCharacter[] enemySet;
+    public Item[] itemSet;
 
     public float GetBiomeScore(Vector2 coord, ClimateMap climateMap) {
         return (GetTemperatureScore(coord,climateMap) + GetHumidityScore(coord,climateMap))/2f;

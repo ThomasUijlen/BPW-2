@@ -8,6 +8,7 @@ public class Ability : MonoBehaviour
     internal TurnDependentObject castedBy;
     internal GameObject body;
     public GameObject startCastEffect;
+    public int aiCastDistance = 1;
 
     public void Cast(TurnDependentObject by, GameObject body) {
         castedBy = by;

@@ -26,6 +26,7 @@ public class PathFinder : MonoBehaviour
         while(true) {
             PathNode exploreTarget = GetLowestScoreNode();
             tries++;
+            if(exploreTarget == null) break;
 
             if(exploreTarget.coord == to) {
                 BuildPath(exploreTarget);
