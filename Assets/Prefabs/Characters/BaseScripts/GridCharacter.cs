@@ -13,7 +13,7 @@ public class GridCharacter : TurnDependentObject
 
     public new void Start() {
         dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
-        base.Start();  
+        base.Start();
     }
 
     public void Move(Vector2 direction) {
@@ -62,7 +62,7 @@ public class GridCharacter : TurnDependentObject
 
     private void Update() {
         if(moving) {
-            moveProgress += Time.deltaTime;
+            moveProgress += Time.deltaTime*1.3f;
             if(moveProgress > 1.0f) {
                 moveProgress = 1.0f;
                 moving = false;

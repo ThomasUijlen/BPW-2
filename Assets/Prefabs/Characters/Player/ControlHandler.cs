@@ -11,15 +11,15 @@ public class ControlHandler : MonoBehaviour
     public GameObject inventory;
     public GameObject cancelButton;
 
-    private void OnEnable() {
-        ShowAll();
-        HideAll();
-        ShowStartButtons();
-    }
+    // private void OnEnable() {
+    //     ShowAll();
+    //     HideAll();
+    //     ShowStartButtons();
+    // }
 
-    private void OnDisable() {
-        HideAll();
-    }
+    // private void OnDisable() {
+    //     HideAll();
+    // }
 
     public void HideAll() {
         startButtons.SetActive(false);

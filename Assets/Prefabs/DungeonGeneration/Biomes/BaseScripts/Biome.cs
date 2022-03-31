@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Biome : MonoBehaviour
 {
+    private const int TEMP_WEIGHT = 2;
+    private const int HUMIDITY_WEIGHT = 1;
+
     [SerializeField]
     private float preferredTemperature = 0.0f;
     private float temperatureRange = 20.0f;
@@ -20,7 +23,7 @@ public class Biome : MonoBehaviour
     public Item[] itemSet;
 
     public float GetBiomeScore(Vector2 coord, ClimateMap climateMap) {
-        return (GetTemperatureScore(coord,climateMap) + GetHumidityScore(coord,climateMap))/2f;
+        return (GetTemperatureScore(coord,climateMap)*TEMP_WEIGHT + GetHumidityScore(coord,climateMap)*HUMIDITY_WEIGHT)/2f;
     }
 
     public float GetTemperatureScore(Vector2 coord, ClimateMap climateMap) {

@@ -31,6 +31,7 @@ public class TurnHandler : MonoBehaviour
     }
 
     private void StartTurnFor(TurnDependentObject turnDependentObject) {
+        Debug.Log(turnDependentObject);
         objectTakingTurn = turnDependentObject;
         turnDependentObject.StartTurn();
     }

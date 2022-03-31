@@ -49,7 +49,7 @@ public class DungeonMap : MonoBehaviour
         {
             for (int y = 0; y < dungeonMap.GetLength(1); y++)
             {
-                if(fastNoise.GetNoise2D(x,y)*100f < roomSpawnChance) {
+                if(fastNoise.GetNoise2D(x,y)*100f < roomSpawnChance || (x == Mathf.RoundToInt(dungeonMap.GetLength(0)/2f) && y == Mathf.RoundToInt(dungeonMap.GetLength(1)/2f))) {
                     Room room = new Room();
                     room.center = new Vector2(x,y);
                     room.size = new Vector2(

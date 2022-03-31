@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField]
     public int mapSize = 20;
 
+    public GridCharacter player;
+
     [SerializeField]
     private bool fillEmpty = true;
 
@@ -22,13 +25,18 @@ public class DungeonGenerator : MonoBehaviour
 
     private void Awake() {
         climateMap = GetComponent<ClimateMap>();
-        climateMap.GenerateClimateMap(mapSize);
-
         dungeonMap = GetComponent<DungeonMap>();
-        dungeonMap.GenerateDungeonMap(mapSize);
 
+        SetSeeds();
+        climateMap.GenerateClimateMap(mapSize);
+        dungeonMap.GenerateDungeonMap(mapSize);
         GenerateDungeon();
         FillDungeon();
+
+        int mapCenter = Mathf.CeilToInt(mapSize/2f);
+        Vector2 playerCoord = new Vector2(mapCenter,mapCenter);
+        OccupyTile(playerCoord,player);
+        player.SetCoord(playerCoord);
     }
 
     private void GenerateDungeon() {
@@ -124,5 +132,63 @@ public class DungeonGenerator : MonoBehaviour
 
         public bool active = false;
         public GridCharacter occupiedBy = null;
+    }
+
+
+
+
+
+
+
+
+
+
+    //Saving and loading
+    private string SAVE_PATH = "";
+    private DungeonSettings dungeonSettings = null;
+    public void SetSeeds() {
+        SetFilePath();
+
+        if(File.Exists(SAVE_PATH)) {
+            Debug.Log("Load old");
+            StreamReader reader = new StreamReader(SAVE_PATH);
+            dungeonSettings = JsonUtility.FromJson<DungeonSettings>(reader.ReadToEnd());
+        } else {
+            Debug.Log("generate new");
+            dungeonSettings = new DungeonSettings();
+            dungeonSettings.Randomize();
+        }
+
+        dungeonMap.seed = dungeonSettings.dungeonSeed;
+        climateMap.temperatureSeed = dungeonSettings.temperatureSeed;
+        climateMap.humiditySeed = dungeonSettings.humiditySeed;
+    }
+
+    private void SetFilePath() {
+        if(Application.isEditor) {
+            SAVE_PATH = Application.dataPath + "/dungeonSave.text";
+        } else {
+            SAVE_PATH = Application.persistentDataPath + "/dungeonSave.text";
+        }
+    }
+
+    private void OnApplicationQuit() {
+        StreamWriter writer = new StreamWriter(SAVE_PATH, false);
+        writer.WriteLine(JsonUtility.ToJson(dungeonSettings));
+        writer.Close();
+        writer.Dispose();
+    }
+
+    private class DungeonSettings {
+        public int dungeonSeed = 0;
+        public int temperatureSeed = 0;
+        public int humiditySeed = 0;
+
+        public void Randomize() {
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            dungeonSeed = Random.Range(0,100000000);
+            temperatureSeed = Random.Range(0,100000000);
+            humiditySeed = Random.Range(0,100000000);
+        }
     }
 }

@@ -4851,10 +4851,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDirectional: 1
   startCastEffect: {fileID: 0}
-  aiCastDistance: 5
+  aiCastDistance: 2
   projectileSpeed: 4
-  damage: 50
-  maxFlyDistance: 10
+  damage: 20
+  maxFlyDistance: 2
   hitEffect: {fileID: 1724092577383545034, guid: 1edfd3e4cb0b0964a85f38f17c1daf41, type: 3}
 --- !u!1 &4325722726236957111
 GameObject:

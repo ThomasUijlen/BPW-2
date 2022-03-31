@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 770653892682069749}
   - component: {fileID: 3542519713907490481}
   m_Layer: 0
-  m_Name: BaseEnemy
+  m_Name: FireEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117844a7ab469ef4885b8a12be8a7af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionDistance: 10
+  detectionDistance: 15
   ability: {fileID: 4871217126645701884, guid: a3a80ff2abc9aae4e8ecea1a923f39cb, type: 3}
 --- !u!114 &770653892682069749
 MonoBehaviour:
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270018975662e5d4c9f94f282750d01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   maxEnergy: 100
   energyRegen: 20
   currentHealth: 0
@@ -220,7 +220,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8357e0be8f21f4d4f9e25154f52b0df2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

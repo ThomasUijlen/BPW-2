@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Popup : MonoBehaviour
 {
-    internal Vector3 targetScale = Vector3.one;
+    public Vector3 targetScale = Vector3.one;
     internal Vector3 originalScale = Vector3.zero;
 
     internal void Start() {

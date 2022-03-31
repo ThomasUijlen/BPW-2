@@ -93,6 +93,7 @@ MonoBehaviour:
   biomes:
   - {fileID: 4790375782075000292, guid: a1170e66672d5a94c9ceefc49817527e, type: 3}
   mapSize: 20
+  player: {fileID: 0}
   fillEmpty: 1
 --- !u!114 &2893781514207172517
 MonoBehaviour:
@@ -131,4 +132,4 @@ MonoBehaviour:
   minRoomSize: 2
   maxRoomSize: 5
   enemySpawnChance: 6
-  itemSpawnChance: 10
+  itemSpawnChance: 12

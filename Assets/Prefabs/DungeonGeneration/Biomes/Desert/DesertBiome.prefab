@@ -44,8 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preferredTemperature: 25
-  preferredHumidity: 5
+  preferredHumidity: 10
   tileSet:
   - {fileID: -7323618051894684741, guid: ee79ce8826a5f8948a93755fbdf78f7c, type: 3}
   blockedTileSet:
   - {fileID: -7323618051894684741, guid: 819116e6a40b3534ca15c760390e98e5, type: 3}
+  enemySet:
+  - {fileID: 8931749639038669817, guid: d9240050829ad854393c5e3550a99961, type: 3}
+  itemSet:
+  - {fileID: 5245937852001795502, guid: 94effde38a8c83043a0a7b4a1ce536e1, type: 3}

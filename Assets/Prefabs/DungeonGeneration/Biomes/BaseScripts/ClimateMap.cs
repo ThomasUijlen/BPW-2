@@ -11,7 +11,7 @@ public class ClimateMap : MonoBehaviour
     [Header("Temperature Settings")]
 
     [SerializeField]
-    private int temperatureSeed = 0;
+    public int temperatureSeed = 0;
     [SerializeField]
     private float temperatureNoiseFrequency = 1f;
 
@@ -24,7 +24,7 @@ public class ClimateMap : MonoBehaviour
     [Header("Humidity Settings")]
 
     [SerializeField]
-    private int humiditySeed = 0;
+    public int humiditySeed = 0;
     [SerializeField]
     private float humidityNoiseFrequency = 1f;
 
