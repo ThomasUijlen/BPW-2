@@ -18,7 +18,7 @@ public class AbilityBar : MonoBehaviour
 
     public void AbilityPressed(GameObject obj) {
         selectedAbilityPrefab = obj.GetComponent<Item>().equipPrefab.GetComponent<Ability>();
-        Debug.Log(selectedAbilityPrefab.isDirectional);
+        
         if(selectedAbilityPrefab.isDirectional) {
             directionalAbilityPressed.Invoke();
         } else {

@@ -80,37 +80,39 @@ public class DungeonGenerator : MonoBehaviour
 
     public bool IsActive(Vector2 coord) {
         if(coord.x < 0 || coord.y < 0 || coord.x >= tiles.GetLength(0) || coord.y >= tiles.GetLength(1)) return false;
-        return tiles[(int) coord.x, (int) coord.y].active;
+        return tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)].active;
     }
 
     public void OccupyTile(Vector2 coord, GridCharacter character) {
-        tiles[(int) coord.x, (int) coord.y].occupiedBy = character;
+        tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)].occupiedBy = character;
     }
 
     public GridCharacter GetOccupyingCharacter(Vector2 coord) {
-        return tiles[(int) coord.x, (int) coord.y].occupiedBy;
+        return tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)].occupiedBy;
     }
 
     public bool IsEmpty(Vector2 coord) {
-        return IsActive(coord) && tiles[(int) coord.x, (int) coord.y].occupiedBy == null;
+        return IsActive(coord) && tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)].occupiedBy == null;
     }
 
     public void PlaceItem(Vector2 coord, Item item) {
-        TileCell tileCell = tiles[(int) coord.x, (int) coord.y];
+        TileCell tileCell = tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)];
+        item.gameObject.SetActive(true);
+        item.canBeGrabbed = false;
         tileCell.item = item;
         item.transform.position = tileCell.tile.transform.position + Vector3.up;
     }
 
     public Item GetItem(Vector2 coord) {
-        return tiles[(int) coord.x, (int) coord.y].item;
+        return tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)].item;
     }
 
     public bool HasItem(Vector2 coord) {
-        return IsActive(coord) && tiles[(int) coord.x, (int) coord.y].item != null;
+        return IsActive(coord) && tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)].item != null;
     }
 
     public void ClearItem(Vector2 coord) {
-        tiles[(int) coord.x, (int) coord.y].item = null;
+        tiles[Mathf.RoundToInt(coord.x), Mathf.RoundToInt(coord.y)].item = null;
     }
 
     public class TileCell {

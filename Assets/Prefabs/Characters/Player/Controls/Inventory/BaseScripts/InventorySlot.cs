@@ -32,8 +32,8 @@ public class InventorySlot : MonoBehaviour
         }
 
         this.item = item;
+        if(this.item) this.item.gameObject.SetActive(isActiveAndEnabled);
         itemChanged.Invoke(this.item);
-        if(this.item) item.gameObject.SetActive(isActiveAndEnabled);
     }
 
     public Item GetItem() {

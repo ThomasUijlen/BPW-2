@@ -16,13 +16,10 @@ public class InventoryHandler : MonoBehaviour
 
     public void CheckForPickup() {
         Vector2 coord = gridCharacter.GetCoord();
-        Debug.Log(dungeonGenerator.HasItem(coord));
-        Debug.Log(coord);
+
         if(dungeonGenerator.HasItem(coord)) {
             Item item = dungeonGenerator.GetItem(coord);
             InventorySlot slot = GetEmptySlot();
-
-            Debug.Log(item);
 
             if(slot) {
                 dungeonGenerator.ClearItem(coord);
@@ -34,7 +31,6 @@ public class InventoryHandler : MonoBehaviour
 
     private InventorySlot GetEmptySlot() {
         foreach(InventorySlot slot in inventorySlots) {
-            Debug.Log(slot.hasItem());
             if(!slot.hasItem()) return slot;
         }
 

@@ -451,9 +451,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: DungeonGenerator
       objectReference: {fileID: 0}
-    - target: {fileID: 7429997486580244390, guid: d5ee277f07fe169458c8f36b583452ec, type: 3}
-      propertyPath: m_TagString
-      value: DungeonGenerator
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5ee277f07fe169458c8f36b583452ec, type: 3}

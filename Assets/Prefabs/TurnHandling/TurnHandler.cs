@@ -2,40 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TurnHandler
+public class TurnHandler : MonoBehaviour
 {
-    private static LinkedList<TurnDependentObject> turnDependentObjects = new LinkedList<TurnDependentObject>();
+    private LinkedList<TurnDependentObject> turnDependentObjects = new LinkedList<TurnDependentObject>();
 
-    public static TurnDependentObject objectTakingTurn;
+    public TurnDependentObject objectTakingTurn;
 
-    public static void Refresh() {
-        turnDependentObjects = new LinkedList<TurnDependentObject>();
-        objectTakingTurn = null;
-    }
-
-    public static void RegisterTurnDependentObject(TurnDependentObject turnDependentObject) {
+    public void RegisterTurnDependentObject(TurnDependentObject turnDependentObject) {
         turnDependentObjects.AddLast(turnDependentObject);
 
         if(turnDependentObjects.Count == 1) StartTurnFor(turnDependentObject);
     }
 
-    public static void DeregisterTurnDependentObject(TurnDependentObject turnDependentObject) {
+    public void DeregisterTurnDependentObject(TurnDependentObject turnDependentObject) {
         if(turnDependentObject == objectTakingTurn) RegisterTurnEnd(turnDependentObject);
         if(turnDependentObjects.Contains(turnDependentObject)) turnDependentObjects.Remove(turnDependentObject);
     }
 
-    public static void RegisterTurnEnd(TurnDependentObject turnDependentObject) {
+    public void RegisterTurnEnd(TurnDependentObject turnDependentObject) {
         LinkedListNode<TurnDependentObject> linkedListNode = turnDependentObjects.Find(turnDependentObject);
 
         if(linkedListNode.Next != null) {
             StartTurnFor(linkedListNode.Next.Value);
         } else {
-            StartTurnFor(turnDependentObjects.First.Value);
+            //Start after delay to prevent endless loops of 1 object starting and ending its own turn.
+            if(turnDependentObjects.Count > 0 && this != null) StartCoroutine(StartAfterDelay(0.1f,turnDependentObjects.First.Value));
         }
     }
 
-    private static void StartTurnFor(TurnDependentObject turnDependentObject) {
+    private void StartTurnFor(TurnDependentObject turnDependentObject) {
         objectTakingTurn = turnDependentObject;
         turnDependentObject.StartTurn();
+    }
+
+    private IEnumerator StartAfterDelay(float time, TurnDependentObject turnDependentObject)
+    {
+        yield return new WaitForSeconds(time);
+        StartTurnFor(turnDependentObject);
     }
 }

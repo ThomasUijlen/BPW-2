@@ -7,10 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject controls;
 
-    private void Awake() {
-        TurnHandler.Refresh();
-    }
-
     public void ShowControls() {
         controls.SetActive(true);
     }

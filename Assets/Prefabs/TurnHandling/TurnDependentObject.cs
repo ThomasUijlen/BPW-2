@@ -8,8 +8,11 @@ public class TurnDependentObject : MonoBehaviour
     public UnityEvent turnStarted;
     public UnityEvent turnEnded;
 
+    private TurnHandler turnHandler;
+
     public void Start() {
-        TurnHandler.RegisterTurnDependentObject(this);
+        turnHandler = GameObject.FindGameObjectWithTag("TurnHandler").GetComponent<TurnHandler>();
+        turnHandler.RegisterTurnDependentObject(this);
     }
 
     public void StartTurn() {
@@ -18,10 +21,10 @@ public class TurnDependentObject : MonoBehaviour
 
     public void EndTurn() {
         turnEnded.Invoke();
-        TurnHandler.RegisterTurnEnd(this);
+        turnHandler.RegisterTurnEnd(this);
     }
 
     public void OnDestroy() {
-        TurnHandler.DeregisterTurnDependentObject(this);
+        turnHandler.DeregisterTurnDependentObject(this);
     }
 }

@@ -19,7 +19,6 @@ public class Item : MonoBehaviour
     private Vector3 offset;
 
     public void ItemGrabbed() {
-        Debug.Log(canBeGrabbed);
         if(!canBeGrabbed) return;
         grabbed = true;
 
@@ -33,9 +32,9 @@ public class Item : MonoBehaviour
 
         if(newSlot != null) {
             if(inventorySlot != null) inventorySlot.SetItem(null);
-            newSlot.SetItem(this);
             inventorySlot = newSlot;
             newSlot = null;
+            inventorySlot.SetItem(this);
         }
     }
 
